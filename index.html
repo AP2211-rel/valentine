@@ -1,184 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You ❤️</title>
 
 <style>
-  body {
-    margin: 0;
-    font-family: 'Georgia', serif;
-    background: #ffffff;
-    color: #333;
-    text-align: center;
-  }
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #ffffff;
+  text-align: center;
+  color: #333;
+}
 
-  section {
-    padding: 100px 20px;
-  }
+#passwordBox {
+  padding: 120px 20px;
+}
 
-  h1 {
-    font-size: 2.5em;
-    color: #b30059;
-    margin-bottom: 40px;
-  }
+#mainContent {
+  display: none;
+  padding: 80px 20px;
+}
 
-  button {
-    display: block;
-    margin: 20px auto;
-    padding: 14px 30px;
-    border: 1px solid #b30059;
-    background: transparent;
-    color: #b30059;
-    font-size: 1em;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+button {
+  margin: 15px;
+  padding: 12px 28px;
+  border-radius: 25px;
+  border: 1px solid #b30059;
+  background: transparent;
+  color: #b30059;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-  button:hover {
-    background: #b30059;
-    color: white;
-  }
+button:hover {
+  background: #b30059;
+  color: white;
+}
 
-  .message {
-    display: none;
-    max-width: 750px;
-    margin: 40px auto;
-    font-size: 1.2em;
-    line-height: 1.9;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease;
-  }
+.message {
+  display: none;
+  max-width: 700px;
+  margin: 30px auto;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  line-height: 1.9;
+}
 
-  .message.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
+.message.show {
+  display: block;
+  opacity: 1;
+}
 
-  #mainContent {
-    display: none;
-  }
+.closeBtn {
+  margin-top: 15px;
+  font-size: 0.9em;
+  background: none;
+  border: none;
+  color: #b30059;
+  cursor: pointer;
+}
 
-  #passwordBox {
-    padding: 120px 20px;
-  }
-
-  input {
-    padding: 10px 15px;
-    border-radius: 20px;
-    border: 1px solid #b30059;
-    outline: none;
-  }
-
-  footer {
-    padding: 120px 20px;
-    font-size: 1em;
-    color: #666;
-  }
 </style>
 </head>
 
 <body>
 
-<!-- 🔒 PASSWORD SCREEN -->
+<!-- PASSWORD -->
 <div id="passwordBox">
-  <h1>Enter the password 💌</h1>
-  <p>Hint: The day it all started (dd/mm)</p>
-  <input type="text" id="passwordInput" placeholder="Enter password">
+  <h1>Enter Password 💌</h1>
+  <input id="pass" type="text" placeholder="Enter password">
   <br><br>
-  <button onclick="checkPassword()">Unlock ❤️</button>
-  <p id="errorText" style="color:red;"></p>
+  <button onclick="unlock()">Unlock ❤️</button>
+  <p id="error" style="color:red;"></p>
 </div>
 
-<!-- 💘 MAIN CONTENT -->
+<!-- MAIN -->
 <div id="mainContent">
 
-<section>
-  <h1>Open Slowly ❤️</h1>
+<h1>Open Slowly ❤️</h1>
 
-  <button onclick="showMessage('m1')">Open when you smile 🙂</button>
-  <div id="m1" class="message">
-    When you smile, something inside me softens.  
-    It’s quiet, but real.  
-    Your happiness matters to me more than I say.
-  </div>
+<button onclick="show('m1')">Open when you smile 🙂</button>
+<div id="m1" class="message">
+When you smile, something inside me softens.  
+It’s not dramatic — just steady.  
+Your happiness genuinely matters to me more than I probably show.  
+Seeing you happy makes my day feel complete.
 
-  <button onclick="showMessage('m2')">Open when you miss me 🌙</button>
-  <div id="m2" class="message">
-    Distance may create space,  
-    but it doesn’t create distance in my feelings.  
-    I’m still here — steady, intentional.
-  </div>
+<br>
+<button class="closeBtn" onclick="closeMessage('m1')">Close ✖</button>
+</div>
 
-  <button onclick="showMessage('m3')">Open when you doubt us 🤍</button>
-  <div id="m3" class="message">
-    I don’t promise perfection.  
-    I promise effort.  
-    And effort is something I’ll never stop giving.
-  </div>
+<button onclick="show('m2')">Open when you miss me 🌙</button>
+<div id="m2" class="message">
+Distance makes things quiet sometimes.  
+But even in silence, I’m still choosing you.  
+Still caring.  
+Still thinking about you in small, random moments.
 
-  <button onclick="showMessage('m4')">Open on Valentine’s Day 💌</button>
-  <div id="m4" class="message">
-    Valentine’s Day isn’t about grand gestures for me.  
-    It’s about choosing someone intentionally.  
-    And I choose you.
-  </div>
+No matter the miles, my intention stays the same.
 
-  <button onclick="showMessage('final')">Open last 💖</button>
-  <div id="final" class="message">
-    There’s something I’ve wanted to ask you...  
+<br>
+<button class="closeBtn" onclick="closeMessage('m2')">Close ✖</button>
+</div>
 
-    <br><br>
+<button onclick="show('m3')">Open when you doubt us 🤍</button>
+<div id="m3" class="message">
+I won’t promise perfection.  
+But I promise effort.  
+Real effort.  
+The kind that shows up even when things feel uncertain.
 
-    Will you be mine — not just today,  
-    but in all the quiet days that follow? ❤️
+I don’t take what we have lightly.
 
-    <br><br>
+<br>
+<button class="closeBtn" onclick="closeMessage('m3')">Close ✖</button>
+</div>
 
-    <button onclick="finalAnswer('yes')">Yes 💖</button>
-    <button onclick="finalAnswer('no')">No 🙃</button>
+<button onclick="show('m4')">Open on Valentine’s Day 💌</button>
+<div id="m4" class="message">
+Valentine’s Day isn’t about grand gestures for me.  
+It’s about choosing someone intentionally.  
 
-    <p id="finalResponse" style="margin-top:30px;"></p>
-  </div>
+And I choose you — not loudly,  
+but sincerely.
 
-</section>
+Not just today,  
+but on normal days too.
 
-<footer>
-  Some things are better opened slowly.
-</footer>
+<br>
+<button class="closeBtn" onclick="closeMessage('m4')">Close ✖</button>
+</div>
+
+<button onclick="show('final')">Open last 💖</button>
+<div id="final" class="message">
+
+There’s something I’ve wanted to ask you...
+
+<br><br>
+
+Will you be mine? ❤️
+
+<br><br>
+
+<button onclick="answer('yes')">Yes 💖</button>
+<button onclick="answer('no')">No 🙃</button>
+
+<p id="response" style="margin-top:25px;"></p>
+
+<br>
+<button class="closeBtn" onclick="closeMessage('final')">Close ✖</button>
+
+</div>
 
 </div>
 
 <script>
-  function checkPassword() {
-    const password = document.getElementById("passwordInput").value;
-    
-    // CHANGE THIS PASSWORD 👇
-    if (password === "17/01") {
-      document.getElementById("passwordBox").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-    } else {
-      document.getElementById("errorText").innerText = "Not quite ❤️";
-    }
-  }
 
-  function showMessage(id) {
-    const msg = document.getElementById(id);
-    msg.classList.add("show");
-  }
+function unlock() {
+  var password = document.getElementById("pass").value;
 
-  function finalAnswer(answer) {
-    const response = document.getElementById("finalResponse");
-    if (answer === "yes") {
-      response.innerHTML = "That makes my heart very calm and very happy ❤️";
-    } else {
-      response.innerHTML = "I’ll keep choosing you anyway 😌";
-    }
+  if (password === "love") {  // change password here
+    document.getElementById("passwordBox").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+  } else {
+    document.getElementById("error").innerText = "Wrong password ❤️";
   }
+}
+
+function show(id) {
+  var element = document.getElementById(id);
+  element.classList.add("show");
+}
+
+function closeMessage(id) {
+  var element = document.getElementById(id);
+  element.classList.remove("show");
+}
+
+var reasons = [
+  "Because I genuinely care about you more than I say.",
+  "Because I choose you intentionally, not accidentally.",
+  "Because you make my life calmer and better.",
+  "Because I respect you, and that matters.",
+  "Because I’m not looking for temporary — I’m choosing you.",
+  "Because you deserve someone who stays.",
+  "Because deep down… you know it feels right too."
+];
+
+var count = 0;
+
+function answer(choice) {
+  var response = document.getElementById("response");
+
+  if (choice === "yes") {
+    response.innerHTML = "That makes my heart very calm and very happy ❤️";
+  } else {
+    response.innerHTML = reasons[count % reasons.length];
+    count++;
+  }
+}
+
 </script>
 
 </body>
