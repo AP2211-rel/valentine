@@ -15,10 +15,10 @@ body {
   overflow-x: hidden;
 }
 
-/* Floating soft background hearts */
+/* Floating background hearts */
 .bg-heart {
   position: fixed;
-  color: rgba(255, 182, 193, 0.35);
+  color: rgba(255, 182, 193, 0.3);
   animation: float 18s linear infinite;
   pointer-events: none;
   z-index: 0;
@@ -62,7 +62,6 @@ button:hover {
   color: white;
 }
 
-/* Card styling */
 .card {
   background: white;
   width: 90%;
@@ -77,6 +76,8 @@ button:hover {
   display: none;
   line-height: 1.8;
   font-size: 0.95em;
+  position: relative;
+  z-index: 2;
 }
 
 .card.show {
@@ -104,6 +105,47 @@ input {
   font-size: 1em;
 }
 
+/* Bouquet grow */
+.bouquet {
+  margin-top: 20px;
+  font-size: 60px;
+  animation: grow 2s ease forwards;
+  position: relative;
+  z-index: 5;
+}
+
+@keyframes grow {
+  0% { transform: scale(0.7); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Petals */
+.petal {
+  position: fixed;
+  top: -10px;
+  font-size: 18px;
+  animation: fall linear forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  font-size: 16px;
+  animation: sparkleFade 2s ease-out forwards;
+}
+
+@keyframes sparkleFade {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.5); }
+}
 </style>
 </head>
 
@@ -139,8 +181,8 @@ for (let i = 0; i < 12; i++) {
 
 <button onclick="show('c1')">Open when you smile 🙂</button>
 <div id="c1" class="card">
-When you smile, something inside me softens.  
-Your happiness genuinely matters to me more than I say.  
+When you smile, something inside me softens.
+Your happiness genuinely matters to me more than I say.
 Seeing you happy makes everything feel lighter.
 <br>
 <button class="closeBtn" onclick="closeCard('c1')">Close ✖</button>
@@ -148,8 +190,8 @@ Seeing you happy makes everything feel lighter.
 
 <button onclick="show('c2')">Open when you miss me 🌙</button>
 <div id="c2" class="card">
-Distance creates space, but not distance in my feelings.  
-Even when we're apart, I’m still here — steady, intentional.  
+Distance creates space, but not distance in my feelings.
+Even when we're apart, I’m still here — steady, intentional.
 Still choosing you quietly.
 <br>
 <button class="closeBtn" onclick="closeCard('c2')">Close ✖</button>
@@ -157,8 +199,8 @@ Still choosing you quietly.
 
 <button onclick="show('c3')">Open when you doubt us 🤍</button>
 <div id="c3" class="card">
-I don’t promise perfection.  
-But I promise effort.  
+I don’t promise perfection.
+But I promise effort.
 The kind that stays even when things feel uncertain.
 <br>
 <button class="closeBtn" onclick="closeCard('c3')">Close ✖</button>
@@ -166,8 +208,8 @@ The kind that stays even when things feel uncertain.
 
 <button onclick="show('c4')">Open on Valentine’s Day 💌</button>
 <div id="c4" class="card">
-Valentine’s Day isn’t about big gestures.  
-It’s about intention.  
+Valentine’s Day isn’t about big gestures.
+It’s about intention.
 And my intention with you has always been sincere.
 <br>
 <button class="closeBtn" onclick="closeCard('c4')">Close ✖</button>
@@ -222,10 +264,45 @@ function answer(choice) {
   var response = document.getElementById("response");
 
   if (choice === "yes") {
-    response.innerHTML = "That makes my heart very calm and very happy ❤️";
+    response.innerHTML = `
+      <div id="bouquetBox" style="position:relative;">
+        <div class="bouquet">💐🌹🌷🌸</div>
+        <div style="margin-top:15px;">
+          Happy Valentine’s Day ❤️<br>
+          These flowers are for you — from someone who chooses you.
+        </div>
+      </div>
+    `;
+    launchPetals();
+    launchSparkles();
   } else {
     response.innerHTML = reasons[count % reasons.length];
     count++;
+  }
+}
+
+function launchPetals() {
+  for (let i = 0; i < 20; i++) {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.innerText = "🌸";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 6000);
+  }
+}
+
+function launchSparkles() {
+  const box = document.getElementById("bouquetBox");
+  for (let i = 0; i < 15; i++) {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.innerText = "✨";
+    sparkle.style.left = (Math.random() * 100) + "%";
+    sparkle.style.top = (Math.random() * 80) + "%";
+    box.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 2000);
   }
 }
 </script>
