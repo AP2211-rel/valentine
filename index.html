@@ -167,7 +167,7 @@ for (let i = 0; i < 12; i++) {
 <!-- PASSWORD -->
 <div id="passwordBox">
   <h1>Enter Password 💌</h1>
-  <p style="font-size:0.9em;">Hint: The day it all started dd/mm </p>
+  <p style="font-size:0.9em;">Hint: the day we met dd/mm </p>
   <input id="pass" type="text" placeholder="Enter password">
   <br><br>
   <button onclick="unlock()">Unlock ❤️</button>
@@ -232,7 +232,7 @@ Will you be mine? ❤️
 function unlock() {
   var password = document.getElementById("pass").value;
 
-  if (password === "17/01") {
+  if (password === "16/09") {
     document.getElementById("passwordBox").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
   } else {
