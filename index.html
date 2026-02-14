@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You ❤️</title>
 
 <style>
@@ -14,40 +15,44 @@ body {
   overflow-x: hidden;
 }
 
-/* Floating background hearts */
+/* Floating soft background hearts */
 .bg-heart {
   position: fixed;
-  color: rgba(255, 182, 193, 0.4);
-  font-size: 20px;
-  animation: float 15s linear infinite;
+  color: rgba(255, 182, 193, 0.35);
+  animation: float 18s linear infinite;
   pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes float {
-  0% { transform: translateY(100vh); }
+  0% { transform: translateY(110vh); }
   100% { transform: translateY(-10vh); }
 }
 
 #passwordBox {
-  padding: 120px 20px;
+  padding: 80px 20px;
 }
 
 #mainContent {
   display: none;
-  padding: 60px 20px;
+  padding: 40px 15px 80px 15px;
 }
 
 h1 {
   color: #b30059;
+  font-size: 1.8em;
 }
 
 button {
-  margin: 10px;
-  padding: 12px 28px;
-  border-radius: 25px;
+  width: 90%;
+  max-width: 350px;
+  margin: 12px auto;
+  padding: 14px;
+  border-radius: 30px;
   border: 1px solid #b30059;
-  background: transparent;
+  background: white;
   color: #b30059;
+  font-size: 1em;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -60,16 +65,18 @@ button:hover {
 /* Card styling */
 .card {
   background: white;
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  margin: 25px auto;
+  padding: 22px;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s ease;
   display: none;
-  line-height: 1.9;
+  line-height: 1.8;
+  font-size: 0.95em;
 }
 
 .card.show {
@@ -79,12 +86,22 @@ button:hover {
 }
 
 .closeBtn {
-  margin-top: 20px;
+  margin-top: 18px;
   background: none;
   border: none;
   color: #b30059;
-  cursor: pointer;
-  font-size: 0.9em;
+  font-size: 0.85em;
+}
+
+input {
+  width: 80%;
+  max-width: 250px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #b30059;
+  outline: none;
+  text-align: center;
+  font-size: 1em;
 }
 
 </style>
@@ -92,15 +109,15 @@ button:hover {
 
 <body>
 
-<!-- Background hearts -->
+<!-- Background Hearts -->
 <script>
-for (let i = 0; i < 15; i++) {
+for (let i = 0; i < 12; i++) {
   const heart = document.createElement("div");
   heart.className = "bg-heart";
   heart.innerText = "❤";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (10 + Math.random() * 10) + "s";
-  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  heart.style.fontSize = (12 + Math.random() * 14) + "px";
+  heart.style.animationDuration = (12 + Math.random() * 10) + "s";
   document.body.appendChild(heart);
 }
 </script>
@@ -108,14 +125,14 @@ for (let i = 0; i < 15; i++) {
 <!-- PASSWORD -->
 <div id="passwordBox">
   <h1>Enter Password 💌</h1>
-  <p>Hint: The day it all started</p>
+  <p style="font-size:0.9em;">Hint: The day it all started</p>
   <input id="pass" type="text" placeholder="Enter password">
   <br><br>
   <button onclick="unlock()">Unlock ❤️</button>
-  <p id="error" style="color:red;"></p>
+  <p id="error" style="color:red; font-size:0.9em;"></p>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div id="mainContent">
 
 <h1>Open Slowly ❤️</h1>
@@ -142,8 +159,7 @@ Still choosing you quietly.
 <div id="c3" class="card">
 I don’t promise perfection.  
 But I promise effort.  
-The kind that stays even when things feel uncertain.  
-I value what we have.
+The kind that stays even when things feel uncertain.
 <br>
 <button class="closeBtn" onclick="closeCard('c3')">Close ✖</button>
 </div>
@@ -163,7 +179,7 @@ Will you be mine? ❤️
 <br><br>
 <button onclick="answer('yes')">Yes 💖</button>
 <button onclick="answer('no')">No 🙃</button>
-<p id="response" style="margin-top:20px;"></p>
+<p id="response" style="margin-top:15px;"></p>
 <br>
 <button class="closeBtn" onclick="closeCard('c5')">Close ✖</button>
 </div>
@@ -194,7 +210,7 @@ var reasons = [
   "Because I genuinely care about you deeply.",
   "Because I choose you intentionally, not accidentally.",
   "Because you make my life calmer and better.",
-  "Because I respect you and value you.",
+  "Because I respect and value you.",
   "Because I’m not looking for temporary — I’m choosing you.",
   "Because you deserve someone who stays.",
   "Because deep down… it feels right."
