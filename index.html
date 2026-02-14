@@ -8,9 +8,24 @@
 body {
   margin: 0;
   font-family: Georgia, serif;
-  background: #ffffff;
+  background: #ffe6f0;
   text-align: center;
   color: #333;
+  overflow-x: hidden;
+}
+
+/* Floating background hearts */
+.bg-heart {
+  position: fixed;
+  color: rgba(255, 182, 193, 0.4);
+  font-size: 20px;
+  animation: float 15s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); }
+  100% { transform: translateY(-10vh); }
 }
 
 #passwordBox {
@@ -19,11 +34,15 @@ body {
 
 #mainContent {
   display: none;
-  padding: 80px 20px;
+  padding: 60px 20px;
+}
+
+h1 {
+  color: #b30059;
 }
 
 button {
-  margin: 15px;
+  margin: 10px;
   padding: 12px 28px;
   border-radius: 25px;
   border: 1px solid #b30059;
@@ -38,27 +57,34 @@ button:hover {
   color: white;
 }
 
-.message {
-  display: none;
+/* Card styling */
+.card {
+  background: white;
   max-width: 700px;
-  margin: 30px auto;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+  display: none;
   line-height: 1.9;
 }
 
-.message.show {
+.card.show {
   display: block;
   opacity: 1;
+  transform: translateY(0);
 }
 
 .closeBtn {
-  margin-top: 15px;
-  font-size: 0.9em;
+  margin-top: 20px;
   background: none;
   border: none;
   color: #b30059;
   cursor: pointer;
+  font-size: 0.9em;
 }
 
 </style>
@@ -66,126 +92,112 @@ button:hover {
 
 <body>
 
+<!-- Background hearts -->
+<script>
+for (let i = 0; i < 15; i++) {
+  const heart = document.createElement("div");
+  heart.className = "bg-heart";
+  heart.innerText = "❤";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (10 + Math.random() * 10) + "s";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+}
+</script>
+
 <!-- PASSWORD -->
 <div id="passwordBox">
   <h1>Enter Password 💌</h1>
+  <p>Hint: The day it all started</p>
   <input id="pass" type="text" placeholder="Enter password">
   <br><br>
   <button onclick="unlock()">Unlock ❤️</button>
   <p id="error" style="color:red;"></p>
 </div>
 
-<!-- MAIN -->
+<!-- MAIN CONTENT -->
 <div id="mainContent">
 
 <h1>Open Slowly ❤️</h1>
 
-<button onclick="show('m1')">Open when you smile 🙂</button>
-<div id="m1" class="message">
+<button onclick="show('c1')">Open when you smile 🙂</button>
+<div id="c1" class="card">
 When you smile, something inside me softens.  
-It’s not dramatic — just steady.  
-Your happiness genuinely matters to me more than I probably show.  
-Seeing you happy makes my day feel complete.
-
+Your happiness genuinely matters to me more than I say.  
+Seeing you happy makes everything feel lighter.
 <br>
-<button class="closeBtn" onclick="closeMessage('m1')">Close ✖</button>
+<button class="closeBtn" onclick="closeCard('c1')">Close ✖</button>
 </div>
 
-<button onclick="show('m2')">Open when you miss me 🌙</button>
-<div id="m2" class="message">
-Distance makes things quiet sometimes.  
-But even in silence, I’m still choosing you.  
-Still caring.  
-Still thinking about you in small, random moments.
-
-No matter the miles, my intention stays the same.
-
+<button onclick="show('c2')">Open when you miss me 🌙</button>
+<div id="c2" class="card">
+Distance creates space, but not distance in my feelings.  
+Even when we're apart, I’m still here — steady, intentional.  
+Still choosing you quietly.
 <br>
-<button class="closeBtn" onclick="closeMessage('m2')">Close ✖</button>
+<button class="closeBtn" onclick="closeCard('c2')">Close ✖</button>
 </div>
 
-<button onclick="show('m3')">Open when you doubt us 🤍</button>
-<div id="m3" class="message">
-I won’t promise perfection.  
+<button onclick="show('c3')">Open when you doubt us 🤍</button>
+<div id="c3" class="card">
+I don’t promise perfection.  
 But I promise effort.  
-Real effort.  
-The kind that shows up even when things feel uncertain.
-
-I don’t take what we have lightly.
-
+The kind that stays even when things feel uncertain.  
+I value what we have.
 <br>
-<button class="closeBtn" onclick="closeMessage('m3')">Close ✖</button>
+<button class="closeBtn" onclick="closeCard('c3')">Close ✖</button>
 </div>
 
-<button onclick="show('m4')">Open on Valentine’s Day 💌</button>
-<div id="m4" class="message">
-Valentine’s Day isn’t about grand gestures for me.  
-It’s about choosing someone intentionally.  
-
-And I choose you — not loudly,  
-but sincerely.
-
-Not just today,  
-but on normal days too.
-
+<button onclick="show('c4')">Open on Valentine’s Day 💌</button>
+<div id="c4" class="card">
+Valentine’s Day isn’t about big gestures.  
+It’s about intention.  
+And my intention with you has always been sincere.
 <br>
-<button class="closeBtn" onclick="closeMessage('m4')">Close ✖</button>
+<button class="closeBtn" onclick="closeCard('c4')">Close ✖</button>
 </div>
 
-<button onclick="show('final')">Open last 💖</button>
-<div id="final" class="message">
-
-There’s something I’ve wanted to ask you...
-
-<br><br>
-
+<button onclick="show('c5')">Open last 💖</button>
+<div id="c5" class="card">
 Will you be mine? ❤️
-
 <br><br>
-
 <button onclick="answer('yes')">Yes 💖</button>
 <button onclick="answer('no')">No 🙃</button>
-
-<p id="response" style="margin-top:25px;"></p>
-
+<p id="response" style="margin-top:20px;"></p>
 <br>
-<button class="closeBtn" onclick="closeMessage('final')">Close ✖</button>
-
+<button class="closeBtn" onclick="closeCard('c5')">Close ✖</button>
 </div>
 
 </div>
 
 <script>
-
 function unlock() {
   var password = document.getElementById("pass").value;
 
-  if (password === "love") {  // change password here
+  if (password === "17/01") {
     document.getElementById("passwordBox").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
   } else {
-    document.getElementById("error").innerText = "Wrong password ❤️";
+    document.getElementById("error").innerText = "Not quite ❤️";
   }
 }
 
 function show(id) {
-  var element = document.getElementById(id);
-  element.classList.add("show");
+  document.getElementById(id).classList.add("show");
 }
 
-function closeMessage(id) {
-  var element = document.getElementById(id);
-  element.classList.remove("show");
+function closeCard(id) {
+  document.getElementById(id).classList.remove("show");
 }
 
 var reasons = [
-  "Because I genuinely care about you more than I say.",
+  "Because I genuinely care about you deeply.",
   "Because I choose you intentionally, not accidentally.",
   "Because you make my life calmer and better.",
-  "Because I respect you, and that matters.",
+  "Because I respect you and value you.",
   "Because I’m not looking for temporary — I’m choosing you.",
   "Because you deserve someone who stays.",
-  "Because deep down… you know it feels right too."
+  "Because deep down… it feels right."
 ];
 
 var count = 0;
@@ -200,7 +212,6 @@ function answer(choice) {
     count++;
   }
 }
-
 </script>
 
 </body>
